@@ -1,0 +1,13 @@
+html,
+body {
+  margin: 0;
+}
+
+body {
+  box-sizing: border-box;
+  padding: 0 50px;
+}
+
+canvas{
+  border: 1px solid grey;
+}
