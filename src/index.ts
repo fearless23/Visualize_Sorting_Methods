@@ -1,31 +1,34 @@
-// Bubble Sort
-const passEl = document.getElementById("pass");
-const startEl = document.getElementById("start");
-const bubble_Sort = xxx => {
-  let n = xxx.length - 1;
-  let nextPass = true;
-  let arr = xxx;
-  let t = 0;
-  let pass = 1;
-  while (nextPass) {
-    passEl.innerText = "Pass " + String(pass);
-    nextPass = false;
-    for (let i = 0; i < n; i++) {
-      t += speed;
-      const curr = arr[i];
-      const next = arr[i + 1];
-      if (curr > next) {
-        arr[i] = next;
-        arr[i + 1] = curr;
-        setTimeout(drawArr, t, [...arr], i);
-        nextPass = true;
-      }
-    }
-    n--;
-    pass++;
+import { selectMethod } from "./components/sorting";
+import { createConsts } from "./components/data";
+import { startEl, rangeEl, methodEl } from "./components/elms";
+
+let canChangeOpt = true;
+let noOfItems = 150;
+let methodNum = 2;
+
+createConsts(noOfItems);
+rangeEl.valueAsNumber = noOfItems;
+methodEl.selectedIndex = methodNum - 1;
+
+rangeEl.addEventListener("change", _ => {
+  if (!canChangeOpt) rangeEl.valueAsNumber = noOfItems;
+  else {
+    noOfItems = rangeEl.valueAsNumber;
+    createConsts(noOfItems);
   }
-  console.log("FINISHED");
-};
+});
+
+methodEl.addEventListener("change", () => {
+  if (!canChangeOpt) methodEl.selectedIndex = methodNum - 1;
+  else {
+    methodNum = methodEl.selectedIndex + 1;
+  }
+});
+
 startEl.addEventListener("click", () => {
-  bubble_Sort(data);
+  rangeEl.removeEventListener("change", () => {});
+  methodEl.removeEventListener("change", () => {});
+  canChangeOpt = false;
+  selectMethod[methodNum](globalThis.myData.data);
+  canChangeOpt = true;
 });

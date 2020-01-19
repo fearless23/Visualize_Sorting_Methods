@@ -4,14 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Visualize Sorting Methods</title>
   </head>
   <body>
-    <div style="display: flex; height: 80px; align-items: center;">
-      <button id="start" style="margin-right: 1em;">START</button>
-      <div id="pass"></div>
-    </div>
+    <header>
+      <h1>Visualize Sorting</h1>
+      <div class="opts">
+        <input type="range" name="points" id="range" min="10" max="400" />
+        <select name="" id="selectm" class="select-css">
+          <option value="1">Bubble Sort</option>
+          <option value="2">Selection Sort</option>
+        </select>
+        <button id="start" style="margin-right: 1em;">START</button>
+      </div>
+    </header>
     <canvas id="canvas"></canvas>
     <script src="index.ts"></script>
   </body>
