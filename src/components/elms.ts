@@ -1,12 +1,22 @@
+import {
+  opts,
+  startEl,
+  pauseEl,
+  resumeEl,
+  stopEl,
+  sizeEl,
+  speedEl,
+  methodEl,
+  aboutEl,
+  modalEl,
+  modalCloseEl
+} from "./init";
 import { initData, setSize, setOpts } from "./data";
-
-export const startEl = <HTMLButtonElement>document.getElementById("start");
-export const sizeEl = <HTMLInputElement>document.getElementById("size");
-export const speedEl = <HTMLInputElement>document.getElementById("speed");
-export const methodEl = <HTMLSelectElement>document.getElementById("selectm");
+import { resumeTimeouts, pauseTimeOuts, simpleDrawArr } from "./canvas";
 
 export const disableAll = () => {
-  startEl.innerText = "STOP";
+  globalThis.myData.state = "busy";
+  startEl.innerText = "RUNNING";
   startEl.removeEventListener("click", () => {});
   startEl.disabled = true;
   sizeEl.removeEventListener("change", () => {});
@@ -15,28 +25,67 @@ export const disableAll = () => {
   methodEl.disabled = true;
   speedEl.removeEventListener("change", () => {});
   speedEl.disabled = true;
+
+  stopEl.classList.add("active");
+  stopEl.addEventListener("click", () => {
+    globalThis.myData.state = "stop";
+  });
+  pauseEl.classList.add("active");
+  pauseEl.addEventListener("click", () => {
+    if (globalThis.myData.state === "busy") {
+      globalThis.myData.state = "paused";
+      startEl.innerText = "PAUSED";
+      pauseTimeOuts();
+      pauseEl.classList.remove("active");
+      resumeEl.classList.add("active");
+    }
+  });
+  resumeEl.classList.remove("active");
+  resumeEl.addEventListener("click", () => {
+    if (globalThis.myData.state === "paused") {
+      globalThis.myData.state = "busy";
+      startEl.innerText = "RUNNING";
+      resumeTimeouts();
+      pauseEl.classList.add("active");
+      resumeEl.classList.remove("active");
+    }
+  });
+};
+
+const readyAll = () => {
+  // Start BUTTON IS READY TO BE CLICKED
+  startEl.innerText = "RUN";
+  startEl.disabled = false;
+  sizeEl.disabled = false;
+  methodEl.disabled = false;
+  speedEl.disabled = false;
+  stopEl.classList.remove("active");
+  stopEl.removeEventListener("click", () => {});
+  pauseEl.classList.remove("active");
+  pauseEl.removeEventListener("click", () => {});
+  resumeEl.classList.remove("active");
+  resumeEl.removeEventListener("click", () => {});
 };
 
 const isBusy = () => globalThis.myData.state === "busy";
 
-export const initialize = (prevOpts?: {
-  size: number;
-  methodNum: number;
-  delay: number;
-}) => {
-  // Start BUTTON IS READY TO BE CLICKED
-  startEl.innerText = "START";
-  startEl.disabled = false;
-
+export const initialize = (prevOpts?: opts) => {
+  readyAll();
   // Initial Values are setup...
   let { size, delay, methodNum } = prevOpts || initData();
   sizeEl.valueAsNumber = size;
   methodEl.selectedIndex = methodNum - 1;
-  speedEl.valueAsNumber = delay;
+  speedEl.valueAsNumber = 101 - delay;
   setSize(size); // Sets size, factor, colWidth, data and state
+  if(!prevOpts){
+    simpleDrawArr(globalThis.myData.data);
+  }
 
   sizeEl.addEventListener("change", _ => {
-    if (!isBusy()) setSize(sizeEl.valueAsNumber);
+    if (!isBusy()) {
+      setSize(sizeEl.valueAsNumber);
+      simpleDrawArr(globalThis.myData.data);
+    }
   });
 
   speedEl.addEventListener("change", _ => {
@@ -47,3 +96,13 @@ export const initialize = (prevOpts?: {
     if (!isBusy()) setOpts("methodNum", methodEl.selectedIndex + 1);
   });
 };
+
+
+export const handleAbout = () => {
+  aboutEl.addEventListener("click", () => {
+    modalEl.classList.add("is-active")
+  })
+  modalCloseEl.addEventListener("click", () => {
+    modalEl.classList.remove("is-active")
+  })
+}
