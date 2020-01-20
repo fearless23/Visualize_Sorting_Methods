@@ -8,17 +8,67 @@
     <title>Visualize Sorting Methods</title>
   </head>
   <body>
-    <header>
-      <h1>Visualize Sorting</h1>
-      <div class="opts">
-        <input type="range" name="points" id="range" min="10" max="400" />
-        <select name="" id="selectm" class="select-css">
-          <option value="1">Bubble Sort</option>
-          <option value="2">Selection Sort</option>
-        </select>
-        <button id="start" style="margin-right: 1em;">START</button>
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item is-medium"> Visualize Sorting </a>
+
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-    </header>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item"> About </a>
+        </div>
+
+        <div class="navbar-end">
+          <!-- SPEED -->
+          <div class="navbar-item">
+            <div class="range-container">
+              <div style="margin-right: 6px;">Speed:</div>
+              <input type="range" name="speed" id="speed" min="1" max="100" />
+            </div>
+          </div>
+
+          <!-- SIZE -->
+          <div class="navbar-item">
+            <div class="range-container">
+              <div style="margin-right: 6px;">Size:</div>
+              <input type="range" name="size" id="size" min="10" max="400" />
+            </div>
+          </div>
+
+          <!-- SELECT SORTING METHOD -->
+          <div class="navbar-item">
+            <div class="field">
+              <div class="control">
+                <div class="select is-small is-rounded is-primary">
+                  <select name="" id="selectm">
+                    <option value="1">Bubble Sort</option>
+                    <option value="2">Selection Sort</option>
+                    <option value="3">Insertion Sort</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- BUTTON -->
+          <div class="navbar-item">
+            <button id="start" class="button is-small">START</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <canvas id="canvas"></canvas>
     <script src="index.ts"></script>
   </body>

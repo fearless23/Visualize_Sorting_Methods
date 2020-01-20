@@ -1,75 +1,101 @@
-import {} from "./canvas";
-import { drawArr, colorNum } from "./canvas";
+import { colorNum, drawNum, drawArr } from "./canvas";
 
-const bubbleSort = xxx => {
-  let n = xxx.length - 1;
+const iamDone = (waitFor: number, delay: number, sortMethod: string) => {
+  setTimeout(() => {
+    globalThis.myData.state = "done";
+  }, waitFor + delay);
+  console.log("FINISHED: ", sortMethod);
+};
+
+const bubbleSort = (initArr: number[], delay: number) => {
+  let n = initArr.length - 1;
   let nextPass = true;
-  let arr = xxx;
-  let t = 0;
+  let A = initArr;
+  let waitFor = 0;
   let pass = 1;
   while (nextPass) {
     nextPass = false;
     for (let i = 0; i < n; i++) {
-      t += globalThis.myData.speed;
-      const curr = arr[i];
-      const next = arr[i + 1];
-      setTimeout(colorNum, t, arr[i], i, "pointer");
-      setTimeout(colorNum, t, arr[i + 1], i + 1, "comparing");
+      waitFor += delay;
+      const curr = A[i];
+      const next = A[i + 1];
+      setTimeout(colorNum, waitFor, A[i], i, "pointer");
+      setTimeout(colorNum, waitFor, A[i + 1], i + 1, "comparing");
       if (curr > next) {
-        t += globalThis.myData.speed;
-        setTimeout(colorNum, t, arr[i + 1], i + 1, "swap");
-        arr[i] = next;
-        arr[i + 1] = curr;
+        waitFor += delay;
+        setTimeout(colorNum, waitFor, A[i + 1], i + 1, "swap");
+        A[i] = next;
+        A[i + 1] = curr;
         nextPass = true;
       }
-      t += globalThis.myData.speed;
-      setTimeout(drawArr, t, [...arr], null, n+1);
+      waitFor += delay;
+      setTimeout(drawArr, waitFor, [...A], null, n + 1);
     }
     n--;
     pass++;
   }
-  console.log("FINISHED BUBBLE SORT");
+  iamDone(waitFor, delay, "BUBBLE SORT");
 };
 
-const selectionSort = xxx => {
-  const g = globalThis.myData;
-  let n = xxx.length;
-  let arr = xxx;
-  let t = 0;
+const selectionSort = (initArr: number[], delay: number) => {
+  let n = initArr.length;
+  let A = initArr;
+  let waitFor = 0;
   for (let i = 0; i < n; i++) {
-    t += g.speed;
-    // setTimeout(drawArr, t, [...arr]);
-    setTimeout(colorNum, t, arr[i], i, "pointer");
+    waitFor += delay;
+    setTimeout(colorNum, waitFor, A[i], i, "pointer");
 
     let minIdx = i;
     for (let j = i + 1; j < n; j++) {
-      t += g.speed;
+      waitFor += delay;
       if (j !== i + 1 && j !== minIdx + 1) {
-        setTimeout(colorNum, t, arr[j - 1], j - 1, "normal");
+        setTimeout(colorNum, waitFor, A[j - 1], j - 1, "normal");
       }
-      setTimeout(colorNum, t, arr[j], j, "comparing");
-      if (arr[minIdx] > arr[j]) {
+      setTimeout(colorNum, waitFor, A[j], j, "comparing");
+      if (A[minIdx] > A[j]) {
         if (minIdx !== i) {
-          setTimeout(colorNum, t, arr[minIdx], minIdx, "normal");
+          setTimeout(colorNum, waitFor, A[minIdx], minIdx, "normal");
         }
         minIdx = j;
-        setTimeout(colorNum, t, arr[minIdx], minIdx, "swap");
+        setTimeout(colorNum, waitFor, A[minIdx], minIdx, "swap");
       }
     }
 
-    t += g.speed;
-    setTimeout(colorNum, t, arr[minIdx], minIdx, "swap");
-    // # Swap the found minimum element with the first element
-    const tmp = arr[i];
-    arr[i] = arr[minIdx];
-    arr[minIdx] = tmp;
-    setTimeout(drawArr, t, [...arr], minIdx);
+    waitFor += delay;
+    setTimeout(colorNum, waitFor, A[minIdx], minIdx, "swap");
+    const tmp = A[i];
+    A[i] = A[minIdx];
+    A[minIdx] = tmp;
+    setTimeout(drawArr, waitFor, [...A], minIdx);
   }
-  // setTimeout(drawArr, t, arr);
-  console.log("SELECTION SORT FINISHED");
+  iamDone(waitFor, delay, "SELECTION SORT");
+};
+
+const insertionSort = (initArr: number[], delay: number) => {
+  const n = initArr.length;
+  let A = initArr;
+  let waitFor = 0;
+  for (let i = 1; i < n; ++i) {
+    waitFor += delay;
+    setTimeout(colorNum, waitFor, A[i], i, "pointer");
+    let curr = A[i];
+    let j = i - 1;
+
+    while (j >= 0 && A[j] > curr) {
+      waitFor += delay;
+      setTimeout(colorNum, waitFor, A[j], j, "comparing");
+      A[j + 1] = A[j];
+      j = j - 1;
+    }
+    A[j + 1] = curr;
+    setTimeout(drawArr, waitFor, [...A]);
+  }
+
+  iamDone(waitFor, delay, "INSERTION SORT");
 };
 
 export const selectMethod = {
   1: bubbleSort,
-  2: selectionSort
+  2: selectionSort,
+  3: insertionSort
 };

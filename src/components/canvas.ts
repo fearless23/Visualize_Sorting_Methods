@@ -1,28 +1,19 @@
 import { cw, ch } from "./data";
-import { setPass } from "./elms";
-
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = cw;
 canvas.height = ch;
 
+const colWidth = () => globalThis.myData.colWidth;
+const factor = () => globalThis.myData.factor;
+
 const colorNumInternal = (num: number, i: number, fillStyle: string) => {
   ctx.fillStyle = fillStyle;
-  ctx.fillRect(
-    globalThis.myData.colWidth * i + 20,
-    0,
-    globalThis.myData.colWidth,
-    num * globalThis.myData.factor
-  );
+  ctx.fillRect(colWidth() * i + 20, 0, colWidth(), num * factor());
 };
 
 const clearNumInternal = (num: number, i: number) => {
-  ctx.clearRect(
-    globalThis.myData.colWidth * i + 20,
-    0,
-    globalThis.myData.colWidth,
-    num * globalThis.myData.factor
-  );
+  ctx.clearRect(colWidth() * i + 20, 0, colWidth(), num * factor());
 };
 
 type numType = "pointer" | "comparing" | "normal";
@@ -33,6 +24,8 @@ const colors = {
   sorted: "#d0d0d0",
   swap: "orange"
 };
+
+const exist = (z: any) => z !== null && z !== undefined;
 
 export const colorNum = (num: number, i: number, type: numType = "normal") => {
   const fillStyle = colors[type];
@@ -56,16 +49,14 @@ export const drawArr = (
   afterThisIdx?: number
 ) => {
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-  // setPass(pass);
   for (let i = 0; i < arr.length; i++) {
-    if (beforeThisIdx !== null) {
+    if (exist(beforeThisIdx)) {
       if (i <= beforeThisIdx) {
         colorNumInternal(arr[i], i, colors["sorted"]);
       } else {
         colorNumInternal(arr[i], i, colors["normal"]);
       }
-    }
-    else if (afterThisIdx !== null) {
+    } else if (exist(afterThisIdx)) {
       if (i >= afterThisIdx) {
         colorNumInternal(arr[i], i, colors["sorted"]);
       } else {

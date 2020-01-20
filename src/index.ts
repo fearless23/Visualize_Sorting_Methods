@@ -1,34 +1,35 @@
+import { menuBar } from "./components/menuBar";
+menuBar();
 import { selectMethod } from "./components/sorting";
-import { createConsts } from "./components/data";
-import { startEl, rangeEl, methodEl } from "./components/elms";
 
-let canChangeOpt = true;
-let noOfItems = 150;
-let methodNum = 2;
+import { startEl, initialize, disableAll } from "./components/elms";
 
-createConsts(noOfItems);
-rangeEl.valueAsNumber = noOfItems;
-methodEl.selectedIndex = methodNum - 1;
+let intvId: number;
 
-rangeEl.addEventListener("change", _ => {
-  if (!canChangeOpt) rangeEl.valueAsNumber = noOfItems;
-  else {
-    noOfItems = rangeEl.valueAsNumber;
-    createConsts(noOfItems);
+const checkIfFinished = () => {
+  if (globalThis.myData.state === "done") {
+    clearInterval(intvId);
+    const prevState = globalThis.myData.opts;
+    globalThis.myData.state = "ready";
+    initialize(prevState);
   }
-});
-
-methodEl.addEventListener("change", () => {
-  if (!canChangeOpt) methodEl.selectedIndex = methodNum - 1;
-  else {
-    methodNum = methodEl.selectedIndex + 1;
+  else{
+    console.log("STATE: ",globalThis.myData.state)
   }
-});
+};
 
+const run = () => {
+  const methodNum = globalThis.myData.opts.methodNum;
+  const delay = globalThis.myData.opts.delay;
+  const data = globalThis.myData.data;
+  selectMethod[methodNum](data, delay);
+};
+// Before Click of Button...
+initialize();
+// START BUTTON READY...
 startEl.addEventListener("click", () => {
-  rangeEl.removeEventListener("change", () => {});
-  methodEl.removeEventListener("change", () => {});
-  canChangeOpt = false;
-  selectMethod[methodNum](globalThis.myData.data);
-  canChangeOpt = true;
+  globalThis.myData.state = "busy";
+  disableAll();
+  run();
+  intvId = setInterval(() => checkIfFinished(), 500);
 });
