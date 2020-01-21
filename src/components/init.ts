@@ -1,27 +1,4 @@
-export const menuBar = () => {
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(
-    document.querySelectorAll(".navbar-burger"),
-    0
-  );
-
-  // Check if there are any navbar burgers
-  if ($navbarBurgers.length > 0) {
-    // Add a click event on each of them
-    $navbarBurgers.forEach(el => {
-      el.addEventListener("click", () => {
-        // Get the target from the "data-target" attribute
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        el.classList.toggle("is-active");
-        $target.classList.toggle("is-active");
-      });
-    });
-  }
-};
-
+// Elements
 export const startEl = <HTMLButtonElement>document.getElementById("start");
 export const stopEl = <HTMLSpanElement>document.getElementById("stop");
 export const pauseEl = <HTMLSpanElement>document.getElementById("pause");
@@ -31,11 +8,29 @@ export const speedEl = <HTMLInputElement>document.getElementById("speed");
 export const methodEl = <HTMLSelectElement>document.getElementById("selectm");
 export const aboutEl = <HTMLAnchorElement>document.getElementById("about");
 export const modalEl = <HTMLDivElement>document.getElementById("modal");
-export const modalCloseEl = <HTMLButtonElement>document.getElementById("modalClose");
+export const modalCloseEl = <HTMLButtonElement>(
+  document.getElementById("modalClose")
+);
 
-export const cw = window.innerWidth - 102;
-export const ch = window.innerHeight - 102;
-export type numType = "pointer" | "comparing" | "normal" | "sorted" | "swap";
+// Menu Button Control
+export const menuBar = () => {
+  const menuBtn = <HTMLAnchorElement>document.getElementById("menuBtn");
+  menuBtn.addEventListener("click", () => {
+    const target = menuBtn.dataset.target;
+    const $target = document.getElementById(target);
+    menuBtn.classList.toggle("is-active");
+    $target.classList.toggle("is-active");
+  });
+};
+
+export type numType =
+  | "pointer"
+  | "comparing"
+  | "normal"
+  | "sorted"
+  | "swap"
+  | "swapLeft"
+  | "swapRight";
 export type opts = {
   size: number;
   methodNum: number;
@@ -46,10 +41,14 @@ export const colors = {
   comparing: "#7f00ff",
   normal: "#44a6c6",
   sorted: "#d0d0d0",
-  swap: "orange"
+  swap: "orange",
+  swapLeft: "#FF9F00",
+  swapRight: "#FF4F00"
 };
 
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
+export const cw = window.innerWidth - 102;
+export const ch = window.innerHeight - 102;
 canvas.width = cw;
 canvas.height = ch;
 export const ctx = canvas.getContext("2d");

@@ -17,6 +17,7 @@
         <a class="navbar-item is-medium"> Visualize Sorting </a>
 
         <a
+          id="menuBtn"
           role="button"
           class="navbar-burger burger"
           aria-label="menu"
@@ -57,9 +58,11 @@
               <div class="control">
                 <div class="select is-small is-rounded is-primary">
                   <select name="" id="selectm">
-                    <option value="1">Bubble Sort</option>
-                    <option value="2">Selection Sort</option>
-                    <option value="3">Insertion Sort</option>
+                    <option value="1">Bubble Sort - O(n&sup2;)</option>
+                    <option value="2">Selection Sort - O(n&sup2;)</option>
+                    <option value="3">Insertion Sort - O(n&sup2;)</option>
+                    <option value="4">Merge Sort - O(n*logn)</option>
+                    <option value="4">Quick Sort - O(n&sup2;)</option>
                   </select>
                 </div>
               </div>
@@ -100,6 +103,18 @@
           </p>
           <p>Choose a speed, size, sorting method and click "RUN"</p>
           <p>After that you have 3 controls viz: resume, play, stop</p>
+          <p>Colors in Canvas</p>
+          <ul>
+            <li>Blue: Normal</li>
+            <li>Green: Base Pointer(s)</li>
+            <li>Violet: Comparing to (can be thought as other pointer)</li>
+            <li>Grey: Already sorted Elements</li>
+            <li>
+              Orange: While comparing, some element is found swap worthy. Green
+              and Orange are usually swapped.
+            </li>
+           
+          </ul>
           <p>
             Developed by:
             <a href="https://github.com/fearless23"

@@ -1,4 +1,3 @@
-import { simpleDrawArr } from "./canvas";
 import { opts, cw, ch } from "./init";
 
 export const colWidth = () => globalThis.myData.colWidth;
@@ -25,7 +24,7 @@ export const initData = () => {
   globalThis.myTimeouts = [];
   const size = 150;
   const delay = 3;
-  const methodNum = 2;
+  const methodNum = 5;
   const colWidth = (cw - 40) / size;
   const factor = (ch - 20) / size;
   const data: number[] = [];

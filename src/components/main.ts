@@ -1,4 +1,4 @@
-import { selectMethod } from "./sorting";
+import { selectMethod } from "./sorting_methods/_index";
 import { initialize } from "./elms";
 import { clearTimeouts } from "./canvas";
 

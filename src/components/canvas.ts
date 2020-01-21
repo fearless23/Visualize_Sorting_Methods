@@ -63,6 +63,31 @@ export const drawArr = (
     }, waitFor)
   );
 };
+
+const getColorForMergeSort = (l: number, m: number, r: number) => (
+  i: number
+) => {
+  if (i >= l && i <= m) return colors["swapLeft"];
+  if (i >= m + 1 && i <= r) return colors["swapRight"];
+  return colors["normal"];
+};
+export const drawArrWithColor = (
+  waitFor: number,
+  arr: number[],
+  l: number,
+  m: number,
+  r: number
+) => {
+  pushTimeout(
+    new Timer(() => {
+      clearCanvas();
+      const color = getColorForMergeSort(l, m, r);
+      for (let i = 0; i < arr.length; i++) {
+        colorNumInternal(arr[i], i, color(i));
+      }
+    }, waitFor)
+  );
+};
 export const simpleDrawArr = (arr: number[]) => {
   clearCanvas();
   for (let i = 0; i < arr.length; i++) {
