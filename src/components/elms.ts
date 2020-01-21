@@ -6,10 +6,7 @@ import {
   stopEl,
   sizeEl,
   speedEl,
-  methodEl,
-  aboutEl,
-  modalEl,
-  modalCloseEl
+  methodEl  
 } from "./init";
 import { initData, setSize, setOpts } from "./data";
 import { resumeTimeouts, pauseTimeOuts, simpleDrawArr } from "./canvas";
@@ -96,13 +93,3 @@ export const initialize = (prevOpts?: opts) => {
     if (!isBusy()) setOpts("methodNum", methodEl.selectedIndex + 1);
   });
 };
-
-
-export const handleAbout = () => {
-  aboutEl.addEventListener("click", () => {
-    modalEl.classList.add("is-active")
-  })
-  modalCloseEl.addEventListener("click", () => {
-    modalEl.classList.remove("is-active")
-  })
-}

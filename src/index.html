@@ -10,11 +10,37 @@
       defer
       src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
     ></script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/imgs/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/imgs/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/imgs/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Manifest and Icons https://favicon.io/favicon-generator/ -->
   </head>
   <body>
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item is-medium"> Visualize Sorting </a>
+        <a
+          class="navbar-item is-medium"
+          href="https://visualizesorting.netlify.com/"
+        >
+          Visualize Sorting
+        </a>
+
+        <a class="navbar-item is-small" href="./about.html"> About </a>
 
         <a
           id="menuBtn"
@@ -31,10 +57,6 @@
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" id="about"> About </a>
-        </div>
-
         <div class="navbar-end">
           <!-- SPEED -->
           <div class="navbar-item">
@@ -68,8 +90,7 @@
               </div>
             </div>
           </div>
-          <!-- BUTTON -->
-
+          <!-- PAUSE, RESUME, STOP ICONS -->
           <div class="navbar-item">
             <span class="icon" id="pause" title="Pause">
               <i class="fas fa-pause"></i>
@@ -81,6 +102,7 @@
               <i class="fas fa-stop"></i>
             </span>
           </div>
+          <!-- BUTTON -->
           <div class="navbar-item">
             <button id="start" class="button is-small">RUN</button>
           </div>
@@ -89,46 +111,14 @@
     </nav>
 
     <canvas id="canvas"></canvas>
-    <div class="modal" id="modal">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Visualize Sorting Methods</p>
-          <button class="delete" id="modalClose" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body">
-          <p>
-            This website show different array sorting methods or algorithms used
-            in software engineering using HTML5 Canvas.
-          </p>
-          <p>Choose a speed, size, sorting method and click "RUN"</p>
-          <p>After that you have 3 controls viz: resume, play, stop</p>
-          <p>Colors in Canvas</p>
-          <ul>
-            <li>Blue: Normal</li>
-            <li>Green: Base Pointer(s)</li>
-            <li>Violet: Comparing to (can be thought as other pointer)</li>
-            <li>Grey: Already sorted Elements</li>
-            <li>
-              Orange: While comparing, some element is found swap worthy. Green
-              and Orange are usually swapped.
-            </li>
-           
-          </ul>
-          <p>
-            Developed by:
-            <a href="https://github.com/fearless23"
-              >Jaspreet Singh(@fearless23)</a
-            >
-          </p>
-          <p>
-            <a href="https://github.com/fearless23/Visualize_Sorting_Methods"
-              >github Repo</a
-            >
-          </p>
-        </section>
+    <footer class="footer has-background-grey-lighter	">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Visualize Sorting</strong> by
+          <a href="https://github.com/fearless23">Jaspreet Singh</a>.
+        </p>
       </div>
-    </div>
+    </footer>
     <script src="index.ts"></script>
   </body>
 </html>

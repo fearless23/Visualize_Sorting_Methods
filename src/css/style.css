@@ -1,4 +1,5 @@
 @import "bulma";
+
 canvas {
   border-top: 4px solid grey;
   margin: 0 50px;
@@ -83,4 +84,14 @@ input[type="range"]::-moz-range-track {
 .icon.active {
   opacity: 1;
   cursor: pointer;
+}
+
+.bd-color {
+  border-radius: 2px;
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,.1),inset 0 0 0 1px rgba(0,0,0,.1);
+  display: inline-block;
+  /* float: left; */
+  height: 24px;
+  margin-right: 8px;
+  width: 24px
 }
