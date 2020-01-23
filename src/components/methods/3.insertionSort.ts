@@ -1,4 +1,4 @@
-import { colorNum, drawArr, iamDone } from "../canvas";
+import { colorNum, drawArr, iamDone } from "../draw/canvas";
 
 export const insertionSort = (initArr: number[], delay: number) => {
   const n = initArr.length;

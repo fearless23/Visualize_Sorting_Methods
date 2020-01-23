@@ -1,4 +1,4 @@
-import { drawArrWithColor, iamDone } from "../canvas";
+import { drawArrWithColor, iamDone } from "../draw/canvas";
 class MergeSort {
   delay: number;
   waitFor: number = 0;
