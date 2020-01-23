@@ -1,4 +1,4 @@
-import { drawArrWithColor, iamDone, colorNum, drawArr } from "../canvas";
+import { drawArrWithColor, iamDone, colorNum, drawArr } from "../draw/canvas";
 class QuickSort {
   delay: number;
   waitFor: number = 0;
